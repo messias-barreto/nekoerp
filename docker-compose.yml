@@ -1,0 +1,24 @@
+services:
+  web:
+    image: laravelsail/php82-composer
+    container_name: laravel_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./www:/var/www
+    working_dir: /var/www
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    container_name: laravel_db
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: nekoerp
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - ./docker/database:/var/lib/mysql
