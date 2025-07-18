@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Produto;
 
 use App\UseCase\Produto\CreateNewProdutoUseCase;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class StoreProdutoController
 {
@@ -12,9 +12,9 @@ class StoreProdutoController
         private readonly CreateNewProdutoUseCase $useCase
     ) {}
 
-    public function handle(Request $request): View
+    public function handle(Request $request): RedirectResponse
     {
         $response = $this->useCase->execute($request->all());
-        return view('produto.store');
+        return redirect()->back();
     }
 }

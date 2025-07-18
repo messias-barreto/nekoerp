@@ -26,8 +26,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="price" class="form-label">Preço do Produto</label>
-                    <input type="number" name="variations[0][stock]" class="form-control" required>
+                    <label for="price" class="form-label">Quantidade em Estoque</label>
+                    <input type="number" name="stock" class="form-control" required>
                 </div>
 
                 {{-- Tipo do Produto --}}
@@ -56,7 +56,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" name="variations[0][name]" class="form-control" required>
+                                    <input type="text" name="variations[0][name]" class="form-control">
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm remove-row">Remover</button>
@@ -86,7 +86,7 @@
         const tbody = document.querySelector('#variations-table tbody');
         const newRow = `
             <tr>
-                <td><input type="text" name="variations[${variationIndex}][name]" class="form-control" required></td>
+                <td><input type="text" name="variations[${variationIndex}][name]" class="form-control"></td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger btn-sm remove-row">Remover</button>
                 </td>

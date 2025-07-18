@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Interfaces\ProdutoInterface;
 use App\Models\Produto;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProdutoRepository implements ProdutoInterface
 {
@@ -17,5 +18,10 @@ class ProdutoRepository implements ProdutoInterface
     public function create(array $data): Produto
     {
         return $this->repository->create($data);
+    }
+
+    public function getAllProdutos(): LengthAwarePaginator
+    {
+        return $this->repository->paginate(10);
     }
 }

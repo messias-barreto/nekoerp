@@ -19,38 +19,43 @@ class CreateNewProdutoUseCase
     {
         DB::beginTransaction();
         $produto = $this->produtoRepository->create($data);
-        if(!$produto->exists() || !$produto->id) {
+        if (!$produto->exists() || !$produto->id) {
             DB::rollBack();
             return [
-                'success' => false, 
+                'success' => false,
                 'message' => 'Erro ao criar produto'
             ];
         }
 
-        if(empty($data['variations'])) {
-            dd('sasass');
+        $estoque = $this->estoqueRepository->create([
+            'produto_id' => $produto->id,
+            'quantidade' => $data['stock']
+        ]);
+
+        if (!$estoque->exists() || !$estoque->id) {
+            DB::rollBack();
+            return [
+                'success' => false,
+                'message' => 'Erro ao criar estoque'
+            ];
         }
 
-        foreach ($data['variations'] as $variation) {
-            $variation['produto_id'] = $produto->id;
-            $variacaoProduto = $this->variacaoProdutoRepository->create($variation);
-            $estoque = $this->estoqueRepository->create([
-                'variacao_produto_id' => $variacaoProduto->id,
-                'quantidade' => $variation['stock']
-            ]);
-            
-            dd($estoque);
+        if ($data['variations']) {
+            $this->makeVariant($produto->id, $data['variations']);
         }
 
-        if($produto->exists()) {
-            dd('existe');
-        }
-
-        dd('nao existe');
-
+        DB::commit();
         return [
             'success' => true,
             'message' => 'Produto criado com sucesso',
         ];
     }
+
+    public function makeVariant(int $produto_id, array $data): void
+    {
+        foreach ($data as $variation) {
+            $variation['produto_id'] = $produto_id;
+            $this->variacaoProdutoRepository->create($variation);
+        }
+    }   
 }
