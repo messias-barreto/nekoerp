@@ -9,6 +9,6 @@ class Pedido extends Model
     protected $fillable = [
         'produto_id',
         'qtd',
-        'valor',
+        'valor'
     ];
 }

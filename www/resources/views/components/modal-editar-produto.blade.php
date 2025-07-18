@@ -1,11 +1,9 @@
-
-@props(['id' => null, 'name' => null, 'price' => null, 'stock' => null])
-
 <div class="modal fade" id="modalEditProduct" tabindex="-1" aria-labelledby="modalEditProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="{{ route('produtos.store') }}" method="POST">
+            <form action="{{ route('produtos.update') }}" method="POST">
                 @csrf
+                <input type="hidden" name="id" id="edit-id">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar Mangá - NekoERP</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -18,7 +16,7 @@
                             <i class="bi bi-book"></i> Nome do Produto
                             Nome do Produto
                         </label>
-                        <input type="text" name="name" id="edit-name" class="form-control" required value="{{ $name }}"/>
+                        <input type="text" name="name" id="edit-name" class="form-control" required/>
                     </div>
 
                     {{-- Preço --}}
@@ -26,7 +24,7 @@
                         <label for="price" class="form-label">
                             <i class="bi bi-currency-dollar"></i> Preço do produtos
                         </label>
-                        <input type="number" step="0.01" name="price" id="edit-price" value="{{ $price }}" class="form-control" required>
+                        <input type="number" step="0.01" name="price" id="edit-price" class="form-control" required>
                     </div>
 
                     {{-- Estoque --}}

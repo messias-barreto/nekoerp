@@ -10,7 +10,7 @@ class GetAllProdutosUseCase
         private readonly ProdutoInterface $produtoRepository
     ) {}
 
-    public function execute(): array 
+    public function execute(): array
     {
         $produtos = $this->produtoRepository->getAllProdutos();
         return [

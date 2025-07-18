@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repository;
 
@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProdutoRepository implements ProdutoInterface
 {
-    private Model $repository; 
+    private Model $repository;
     public function __construct()
     {
         $this->repository = app(Produto::class);
@@ -22,6 +22,14 @@ class ProdutoRepository implements ProdutoInterface
 
     public function getAllProdutos(): LengthAwarePaginator
     {
-        return $this->repository->paginate(10);
+        return $this->repository->select('produtos.id', 'produtos.name', 'produtos.price', 'produtos.type', 'estoques.quantidade AS stock')
+        ->join('estoques', 'estoques.produto_id', 'produtos.id')
+        ->paginate(3);
+    }
+
+    public function updateProduto(array $data): bool
+    {
+        $produto = $this->repository->find($data['id']);
+        return $produto->update($data);
     }
 }

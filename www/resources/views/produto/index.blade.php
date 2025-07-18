@@ -30,11 +30,12 @@
                                     <i class="bi bi-cart-plus me-1"></i> Adicionar
                                 </button>
                                 <button class="btn btn-success btn-sm btn-edit-cart" data-id="{{ $product->id }}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalEditProduct" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalEditProduct"
                                     data-name="{{ $product->name }}"
                                     data-price="{{ $product->price }}"
-                                    data-stock="{{ $product->stock }}">
+                                    data-stock="{{ $product->stock ?? 150 }}"
+                                    data-type="{{ $product->type }}">
                                     <i class="bi bi-pen me-1"></i> Editar
                                 </button>
                             </div>
@@ -158,11 +159,19 @@
                     const name = this.getAttribute('data-name');
                     const price = this.getAttribute('data-price');
                     const stock = this.getAttribute('data-stock');
+                    const type = this.getAttribute('data-type');
 
+                    console.log(stock);
                     document.getElementById('edit-id').value = id;
                     document.getElementById('edit-name').value = name;
                     document.getElementById('edit-price').value = price;
                     document.getElementById('edit-stock').value = stock;
+
+                    const select = document.getElementById('edit-type');
+                    console.log(select);
+                    if (select) {
+                        select.value = type;
+                    }
                 });
             });
         });
