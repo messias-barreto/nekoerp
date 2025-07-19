@@ -21,7 +21,6 @@ class AddQuantidadeProdutoNoCarrinhoUseCase
 
         foreach($newCarrinho as &$produto) {
             if($produto['id'] == $data['produto_id']) {
-                $produto['qtd'] += 1;
 
                 $estoque = $this->estoqueRepository->findByProduto($produto['id']);
                 if($produto['qtd'] > $estoque->quantidade) {
@@ -31,6 +30,7 @@ class AddQuantidadeProdutoNoCarrinhoUseCase
                     ];
                 }
 
+                $produto['qtd'] += 1;
                 $estoqueQuantidade = $estoque->quantidade - 1;
                 $this->estoqueRepository->updateEstoque($estoque->id, $estoqueQuantidade);
 
