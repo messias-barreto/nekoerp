@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalCreateProduct" tabindex="-1" aria-labelledby="modalCreateProductLabel" aria-hidden="true">
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container py-5">
@@ -10,7 +10,7 @@
                         Produtos no Carrinho
                     </div>
                     <div class="card-body">
-                        @forelse ($response['products'] as $item)
+                        @forelse (session('carrinho-produtos')['produtos'] ?? [] as $item)
                         <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                             <div>
                                 <strong>{{ $item['name'] }}</strong><br>
@@ -22,7 +22,7 @@
                                     <button class="btn btn-outline-danger btn-sm">-</button>
                                 </form>
 
-                                <span class="mx-2">{{ 1 }}</span>
+                                <span class="mx-2">{{ $item['qtd'] }}</span>
 
                                 <form action="" method="POST">
                                     @csrf
@@ -90,7 +90,6 @@
                     </div>
                 </div>
             </div>
-            @endsection
         </div>
     </div>
 </div>

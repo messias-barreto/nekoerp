@@ -48,6 +48,7 @@ class AddProdutoNoCarrinhoUseCase
         array_push($carrinhoProduto, [
             'id' => $produto->id,
             'name' => $produto->name,
+            'price' => $produto->price,
             'qtd' => 1
         ]);
 

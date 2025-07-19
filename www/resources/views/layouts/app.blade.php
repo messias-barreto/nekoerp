@@ -36,16 +36,18 @@
             </a>
 
             <div class="ms-auto">
-                <button type="button" class="btn btn-outline-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <a href={{ route ('carrinho.index' )}} type="button" class="btn btn-outline-primary position-relative">
                     <i class="bi bi-cart3"></i> Carrinho
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {{ session('carrinho-produtos') ? count(session('carrinho-produtos')['produtos']) : 0 }}
                         <span class="visually-hidden">itens no carrinho</span>
                     </span>
-                </button>
+                </a>
             </div>
         </div>
     </nav>
+
+    <x-modal-carrinho-de-compras />
 
     {{-- Conteúdo principal --}}
     <main class="container">
