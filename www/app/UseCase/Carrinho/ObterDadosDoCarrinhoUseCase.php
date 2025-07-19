@@ -13,10 +13,16 @@ class ObterDadosDoCarrinhoUseCase
     public function execute(): array
     {
         $carrinho = $this->session::get('carrinho-produtos');
-        $valorTotal =$this->obterTotalPedido($carrinho['produtos']);
+        $produtos = $this->removerProdutosQuantidadeZero($carrinho['produtos']);
+
+        $valorTotal =$this->obterTotalPedido($produtos);
         if(empty($carrinho['total']) || $carrinho['total'] != $valorTotal) {
             $carrinho['total'] = $valorTotal;
         }
+
+        $carrinho['produtos'] = $produtos;
+
+        $this->session::put('carrinho-produtos', ['produtos' => $produtos]);
 
         return [
             'success' => true,
@@ -24,6 +30,14 @@ class ObterDadosDoCarrinhoUseCase
         ];
     }
 
+    public function removerProdutosQuantidadeZero(array $produtos): array
+    {
+        $produtosFiltrados = array_filter($produtos, function ($item) {
+            return $item['qtd'] > 0;
+        });
+
+        return array_values($produtosFiltrados);
+    }
 
     public function obterTotalPedido(array $produtos)
     {
