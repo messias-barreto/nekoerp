@@ -24,11 +24,11 @@
                             </div>
                             <div class="mt-auto d-flex justify-content-between align-items-center">
                                 <span class="badge bg-light text-dark">
-                                    <i class="bi bi-box-seam me-1"></i> Estoque: {{ $product->stock ?? 150 }}
+                                    <i class="bi bi-box-seam me-1"></i> Estoque: {{ $product->stock }}
                                 </span>
-                                <button class="btn btn-warning btn-sm btn-add-cart">
-                                    <i class="bi bi-cart-plus me-1"></i> Adicionar
-                                </button>
+
+                                <x-form-carrinho-de-compras id="{{ $product->id }}"></x-form-carrinho-de-compras>
+
                                 <button class="btn btn-success btn-sm btn-edit-cart" data-id="{{ $product->id }}"
                                     data-bs-toggle="modal"
                                     data-bs-target="#modalEditProduct"
@@ -61,26 +61,6 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            let cart = {};
-
-            $('.btn-add-cart').click(function() {
-                const productId = $(this).data('id');
-                const quantity = parseInt($(`.quantity-input[data-id="${productId}"]`).val());
-
-                if (!cart[productId]) {
-                    cart[productId] = quantity;
-                } else {
-                    cart[productId] += quantity;
-                }
-
-                alert(`Produto adicionado ao carrinho. Quantidade atual: ${cart[productId]}`);
-                console.log(cart);
-            });
-        });
-    </script>
-
-    <script>
         let variationIndex = 1;
 
         document.getElementById('add-variation').addEventListener('click', function() {
@@ -109,47 +89,6 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-            let cart = {};
-
-            // Adiciona ao carrinho
-            $('.btn-add-cart').click(function() {
-                const productId = $(this).data('id');
-                const quantity = parseInt($(`.quantity-input[data-id="${productId}"]`).val());
-
-                if (!cart[productId]) {
-                    cart[productId] = quantity;
-                } else {
-                    cart[productId] += quantity;
-                }
-
-                alert(`Produto adicionado ao carrinho. Quantidade atual: ${cart[productId]}`);
-                console.log(cart);
-            });
-
-            // Lógica para adicionar/remover variações
-            let variationIndex = 1;
-
-            $('#add-variation').on('click', function() {
-                const row = `
-                <tr>
-                    <td><input type="text" name="variations[${variationIndex}][name]" class="form-control" required></td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm remove-row">Remover</button>
-                    </td>
-                </tr>
-            `;
-                $('#variations-table tbody').append(row);
-                variationIndex++;
-            });
-
-            $(document).on('click', '.remove-row', function() {
-                $(this).closest('tr').remove();
-            });
-        });
-    </script>
-
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const editButtons = document.querySelectorAll('.btn-edit-cart');
 
@@ -161,14 +100,12 @@
                     const stock = this.getAttribute('data-stock');
                     const type = this.getAttribute('data-type');
 
-                    console.log(stock);
                     document.getElementById('edit-id').value = id;
                     document.getElementById('edit-name').value = name;
                     document.getElementById('edit-price').value = price;
                     document.getElementById('edit-stock').value = stock;
 
                     const select = document.getElementById('edit-type');
-                    console.log(select);
                     if (select) {
                         select.value = type;
                     }

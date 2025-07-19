@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'NekoERP')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="image/logo.png" type="image/png">
 
     {{-- Bootstrap 5 CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,22 +15,35 @@
         body {
             background-color: #fef6f8;
         }
+
         .card {
             border-radius: 1rem;
         }
+
         .btn {
             border-radius: 0.5rem;
         }
+
     </style>
 </head>
 <body>
     {{-- Navbar simples --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="/img/logo.png" alt="NekoERP" height="40" class="me-2">
                 <strong>NekoERP</strong>
             </a>
+
+            <div class="ms-auto">
+                <button type="button" class="btn btn-outline-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="bi bi-cart3"></i> Carrinho
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ session('carrinho-produtos') ? count(session('carrinho-produtos')['produtos']) : 0 }}
+                        <span class="visually-hidden">itens no carrinho</span>
+                    </span>
+                </button>
+            </div>
         </div>
     </nav>
 

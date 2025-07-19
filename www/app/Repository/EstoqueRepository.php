@@ -23,16 +23,16 @@ class EstoqueRepository implements EstoqueInterface
         return $this->repository->where('produto_id', $produto_id)->first();
     }
 
-    public function addQtdInEstoque($estoque_id): Estoque
+    public function addQtdInEstoque($estoque_id): bool
     {
         $estoque = $this->repository->find($estoque_id);
-        return $estoque->update(['quantidade' => $estoque->qtd_estoque + 1]);
+        return $estoque->update(['quantidade' => $estoque->quantidade + 1]);
     }
 
-    public function removeQtdInEstoque(int $qtd): Estoque
+    public function removeQtdInEstoque(int $id): bool
     {
-        $estoque = $this->repository->find($qtd);
-        return $estoque->update(['quantidade' => $estoque->qtd_estoque - 1]);
+        $estoque = $this->repository->find($id);
+        return $estoque->update(['quantidade' => $estoque->quantidade - 1]);
     }
 
     public function updateEstoque(int $id, int $qtd): bool

@@ -20,11 +20,16 @@ class ProdutoRepository implements ProdutoInterface
         return $this->repository->create($data);
     }
 
+    public function findById(int $id): Produto
+    {
+        return $this->repository->find($id);
+    }
+
     public function getAllProdutos(): LengthAwarePaginator
     {
         return $this->repository->select('produtos.id', 'produtos.name', 'produtos.price', 'produtos.type', 'estoques.quantidade AS stock')
         ->join('estoques', 'estoques.produto_id', 'produtos.id')
-        ->paginate(3);
+        ->paginate(9);
     }
 
     public function updateProduto(array $data): bool

@@ -10,10 +10,7 @@ class IndexProdutoController extends Controller
 {
     public function __construct(
         private readonly GetAllProdutosUseCase $useCase
-    )
-    {
-        
-    }
+    ) {}
 
     public function handle(): View
     {
