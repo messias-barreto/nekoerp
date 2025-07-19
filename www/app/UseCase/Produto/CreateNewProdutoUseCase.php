@@ -40,7 +40,7 @@ class CreateNewProdutoUseCase
             ];
         }
 
-        if ($data['variations']) {
+        if (isset($data['variations'])) {
             $this->makeVariant($produto->id, $data['variations']);
         }
 
@@ -57,5 +57,5 @@ class CreateNewProdutoUseCase
             $variation['produto_id'] = $produto_id;
             $this->variacaoProdutoRepository->create($variation);
         }
-    }   
+    }
 }

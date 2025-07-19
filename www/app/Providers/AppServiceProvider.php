@@ -8,6 +8,7 @@ use App\Interfaces\VariacaoProdutoInterface;
 use App\Repository\EstoqueRepository;
 use App\Repository\ProdutoRepository;
 use App\Repository\VariacaoProdutoRepository;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
     }
 }

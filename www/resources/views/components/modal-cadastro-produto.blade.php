@@ -63,7 +63,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" name="variations[0][name]" class="form-control">
+                                    <td><input type="text" name="variations[0][name]" class="form-control" required>
                                     </td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-danger btn-sm remove-row">Remover</button>
