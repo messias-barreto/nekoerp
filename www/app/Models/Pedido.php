@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     protected $fillable = [
-        'valor_pedido',
+        'valor_subtotal',
+        'valor_total',
+        'valor_frete',
+        'valor_desconto',
         'client_name',
         'client_email',
         'cep',

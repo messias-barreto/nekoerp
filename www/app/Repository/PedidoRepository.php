@@ -23,4 +23,16 @@ class PedidoRepository implements PedidoInterface
     {
         return $this->repository->paginate(10);
     }
+
+    public function findById(int $id): ?Pedido
+    {
+        return $this->repository->find($id);
+    }
+
+    public function updateStatus(int $id, string $status): bool
+    {
+        return $this->repository->find($id)->update([
+            'status' => $status
+        ]);
+    }
 }

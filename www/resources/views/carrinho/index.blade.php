@@ -94,14 +94,13 @@
             <div class="card-body">
                 <form action="{{ route('pedido.store') }}" method="POST">
                     @csrf
-                    <input  type="hidden"
-                            name="valor_pedido"
-                            @if(isset($response['data']['cupom']))
-                                value="{{ number_format($response['data']['subtotalComDesconto'], 2, ',', '.') }}"
-                            @else
-                                value="{{ $response['data']['total'] }}"
-                            @endif
-                    />
+                    <input type="hidden" name="valor_subtotal" id="valor_subtotal" value="{{ number_format($response['data']['subtotal'], 2, ',','.') }}">
+                    <input type="hidden" name="valor_total" id="valor_total" value="{{ $response['data']['total'] }}">
+                    <input type="hidden" name="valor_frete" id="valor_frete" value="{{ $response['data']['frete'] }}">
+                    @if(isset($response['data']['cupom']))
+                        <input type="hidden" name="valor_desconto" id="valor_desconto" value="{{ number_format($response['data']['subtotalComDesconto'], 2, ',', '.') }}">
+                    @endif
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="client_name" class="form-label">Nome</label>

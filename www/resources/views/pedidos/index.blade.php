@@ -11,27 +11,29 @@
                 <strong>Pedido #{{ $pedido->id }}</strong><br>
                 <small>Realizado em: {{ $pedido->created_at->format('d/m/Y H:i') }}</small>
             </div>
-            <span class="badge bg-primary">{{ ucfirst($pedido->status) }}</span>
+
+            <span   @if($pedido->status == 'pendente') class="badge bg-primary"
+                    @elseif($pedido->status == 'cancelado') class="badge bg-danger"
+                    @else class="badge bg-success"
+                    @endif
+            >{{ ucfirst($pedido->status) }}</span>
         </div>
         <div class="card-body">
             <p><strong>Cliente:</strong> {{ $pedido->client_name }} ({{ $pedido->client_email }})</p>
             <p><strong>Endereço:</strong> {{ $pedido->logradouro }}, {{ $pedido->complemento }} - {{ $pedido->bairro }} - {{ $pedido->localidade }}/{{ $pedido->uf }}</p>
-            <p><strong>Total:</strong> R$ {{ $pedido->valor_pedido }}</p>
-
-            <hr>
-
-            <h5>Produtos:</h5>
-            @foreach ([] as $produto)
-            <div class="d-flex justify-content-between border-bottom py-2">
-                <div>
-                    <strong>{{ $produto->name }}</strong><br>
-                    <small>Preço unitário: R$ {{ number_format($produto->price, 2, ',', '.') }}</small>
-                </div>
-                <div>
-                    <span>Quantidade: {{ $produto->pivot->qtd }}</span>
-                </div>
-            </div>
-            @endforeach
+            <p><strong>Subtotal:</strong> R$ {{ $pedido->valor_subtotal }}</p>
+            <p><strong>Frete:</strong> R$ {{ $pedido->valor_frete }}</p>
+            <p><strong>Total:</strong> R$
+                @if($pedido->valor_desconto > 0)
+                <span>
+                    <s>R$ {{ $pedido->valor_total }}</s>
+                    <br>
+                    <p class="text-success">Com desconto: <strong>R$ {{ $pedido->valor_desconto }}</strong></p>
+                </span>
+                @else
+                    <strong>{{ $pedido->valor_total }}</strong>
+                @endif
+            </p>
         </div>
     </div>
     @empty
