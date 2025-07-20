@@ -74,7 +74,7 @@
         <div class="card mb-4">
             <div class="card-body d-flex justify-content-between">
                 <strong>Total:</strong>
-                @if(isset($response['data']['subtotalComDesconto']))
+                @if(isset($response['data']['cupom']))
                     <span>
                         <s>R$ {{ $response['data']['total'] }}</s>
                         <br>

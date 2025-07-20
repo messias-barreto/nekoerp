@@ -17,6 +17,10 @@ class RemoverCupomDescontoUseCase
             unset($carrinho['cupom']);
         }
 
+        if(isset($carrinho['subtotalComDesconto'])) {
+            unset($carrinho['subtotalComDesconto']);
+        }
+
         $this->session::put('carrinho-produtos', $carrinho);
 
         return [
