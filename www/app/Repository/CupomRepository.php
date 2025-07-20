@@ -17,4 +17,10 @@ class CupomRepository implements CupomInterface
     {
         return $this->repository->where('name', $name)->first();
     }
+
+    public function alterarQuantidade(int $id, int $quantidade): bool
+    {
+        return $this->repository->find($id)->update(['quantidade' => $quantidade]);
+
+    }
 }

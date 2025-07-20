@@ -9,6 +9,7 @@ class Cupom extends Model
     protected $fillable = [
         'name',
         'valor',
-        'quantidade'
+        'quantidade',
+        'data_expiracao'
     ];
 }
