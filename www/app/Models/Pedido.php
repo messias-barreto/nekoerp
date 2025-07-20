@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     protected $fillable = [
+        'valor_pedido',
         'client_name',
         'client_email',
         'cep',
@@ -16,6 +17,7 @@ class Pedido extends Model
         'localidade',
         'uf',
         'estado',
-        'regiao'
+        'regiao',
+        'status'
     ];
 }

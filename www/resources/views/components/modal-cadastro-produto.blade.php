@@ -23,7 +23,7 @@
                         <label for="price" class="form-label">
                             <i class="bi bi-currency-dollar"></i> Preço do produtos
                         </label>
-                        <input type="number" step="0.01" name="price" class="form-control" required>
+                        <input type="number" step="0.01" min="1.00" name="price" class="form-control" required>
                     </div>
 
                     {{-- Estoque --}}
@@ -31,7 +31,7 @@
                         <label for="stock" class="form-label">
                             <i class="bi bi-box-seam"></i> Quantidade em Estoque
                         </label>
-                        <input type="number" name="stock" class="form-control" required>
+                        <input type="number" min="1" name="stock" class="form-control" required>
                     </div>
 
                     {{-- Tipo --}}

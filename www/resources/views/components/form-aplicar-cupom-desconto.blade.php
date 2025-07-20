@@ -12,6 +12,6 @@
                 required
                 @if($isprodutos <= 0) disabled @endif
         >
-        <button class="btn btn-primary">Aplicar</button>
+        <button class="btn btn-primary" @if($isprodutos <= 0) disabled @endif>Aplicar</button>
     </div>
 </form>

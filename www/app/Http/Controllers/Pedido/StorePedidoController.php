@@ -1,14 +1,19 @@
 <?php
+
 namespace App\Http\Controllers\Pedido;
 
-use Illuminate\Contracts\View\View;
+use App\UseCase\Pedido\AddNewPedidoUseCase;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class StorePedidoController
 {
-    public function handle(Request $request): View
+    public function __construct(
+        private readonly AddNewPedidoUseCase $useCase
+    ) {}
+    public function handle(Request $request): RedirectResponse
     {
-        dd($request->all());
-        return view('produtos.index');
+        $this->useCase->execute($request->all());
+        return redirect('/');
     }
 }

@@ -35,8 +35,14 @@
                 <strong>NekoERP</strong>
             </a>
 
-            <div class="ms-auto">
-                <a href={{ route ('carrinho.index' )}} type="button" class="btn btn-outline-primary position-relative">
+
+            <div class="ms-auto d-flex gap-2">
+            <!-- Botão Pedidos -->
+                <a href="{{ route('pedidos.index') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-bag-check"></i> Pedidos
+                </a>
+                <!-- Botão Carrinho -->
+                <a href="{{ route('carrinho.index') }}" type="button" class="btn btn-outline-primary position-relative">
                     <i class="bi bi-cart3"></i> Carrinho
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {{ isset(session('carrinho-produtos')['produtos']) ? count(session('carrinho-produtos')['produtos']) : 0 }}

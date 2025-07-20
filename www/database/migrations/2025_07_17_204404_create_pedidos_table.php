@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->string('valor_pedido');
             $table->string('client_name');
             $table->string('client_email');
             $table->string('cep');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('uf');
             $table->string('estado');
             $table->string('regiao');
+            $table->enum('status', ['pendente', 'concluido', 'cancelado'])->default('pendente');
             $table->timestamps();
         });
     }
