@@ -14,6 +14,6 @@ class RemoveQuantidadeProdutoNoCarrinhoController
     public function handle(Request $request): RedirectResponse
     {
         $response = $this->useCase->execute($request->all());
-        return redirect('/carrinho');
+        return redirect()->back();
     }
 }

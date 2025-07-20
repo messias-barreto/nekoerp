@@ -20,7 +20,7 @@ class RemoveQuantidadeProdutoNoCarrinhoUseCase
         $carrinho = $this->session::get('carrinho-produtos');
         $newCarrinho = $carrinho['produtos'];
 
-        foreach ($newCarrinho as &$produto) {
+        foreach ($newCarrinho as $key => &$produto) {
             if ($produto['id'] == $data['produto_id']) {
                 $produto['qtd'] -= 1;
 
@@ -28,11 +28,17 @@ class RemoveQuantidadeProdutoNoCarrinhoUseCase
                 $estoqueQuantidade = $estoque->quantidade + 1;
                 $this->estoqueRepository->updateEstoque($estoque->id, $estoqueQuantidade);
 
+                if ($produto['qtd'] == 0) {
+                    unset($newCarrinho[$key]);
+                }
+
                 break;
             }
         }
 
-        $carrinho['produtos'] = $newCarrinho;
+        unset($produto);
+
+        $carrinho['produtos'] = array_values($newCarrinho);
         $this->session::put('carrinho-produtos', $carrinho);
 
         return [

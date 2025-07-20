@@ -13,6 +13,17 @@ class ObterDadosDoCarrinhoUseCase
     public function execute(): array
     {
         $carrinho = $this->session::get('carrinho-produtos');
+        if(empty($carrinho['produtos'])) {
+            $this->session::flush('carrinho-produtos');
+            return [
+                'data' => [
+                    'produtos' => [],
+                    'subtotal' => 0,
+                    'frete' => 0,
+                    'total' => 0
+                ],
+            ];
+        }
         $produtos = $this->removerProdutosQuantidadeZero($carrinho['produtos']);
 
         $valorTotal =$this->obterTotalPedido($produtos);

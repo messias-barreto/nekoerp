@@ -33,7 +33,7 @@ class AddProdutoNoCarrinhoUseCase
         }
 
         $produtoSession = $this->session::get('carrinho-produtos');
-        if (isset($produtoSession) && $this->verificarProdutoEmSessao($produtoSession['produtos'], $produto->id)) {
+        if (isset($produtoSession['produtos']) && $this->verificarProdutoEmSessao($produtoSession['produtos'], $produto->id)) {
             return [
                 'success' => false,
                 'message' => 'Produto Já consta no Carrinho'

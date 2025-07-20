@@ -39,7 +39,7 @@
                 <a href={{ route ('carrinho.index' )}} type="button" class="btn btn-outline-primary position-relative">
                     <i class="bi bi-cart3"></i> Carrinho
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ session('carrinho-produtos') ? count(session('carrinho-produtos')['produtos']) : 0 }}
+                        {{ isset(session('carrinho-produtos')['produtos']) ? count(session('carrinho-produtos')['produtos']) : 0 }}
                         <span class="visually-hidden">itens no carrinho</span>
                     </span>
                 </a>

@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     protected $fillable = [
-        'produto_id',
-        'qtd',
-        'valor'
+        'client_name',
+        'client_email',
+        'cep',
+        'logradouro',
+        'complemento',
+        'bairro',
+        'localidade',
+        'uf',
+        'estado',
+        'regiao'
     ];
 }

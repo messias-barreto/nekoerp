@@ -13,7 +13,7 @@ class CupomRepository implements CupomInterface
         $this->repository = app(Cupom::class);
     }
 
-    public function findByName(string $name): Cupom
+    public function findByName(string $name): ?Cupom
     {
         return $this->repository->where('name', $name)->first();
     }

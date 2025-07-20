@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->string('client_name');
+            $table->string('client_email');
+            $table->string('cep');
+            $table->string('logradouro');
+            $table->string('complemento');
+            $table->string('bairro');
+            $table->string('localidade');
+            $table->string('uf');
+            $table->string('estado');
+            $table->string('regiao');
             $table->timestamps();
         });
     }
