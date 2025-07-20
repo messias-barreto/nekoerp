@@ -21,9 +21,7 @@ class ObterDadosDoCarrinhoUseCase
         }
 
         $carrinho['produtos'] = $produtos;
-
-        $this->session::put('carrinho-produtos', ['produtos' => $produtos]);
-
+        $this->session::put('carrinho-produtos', $carrinho);
         return [
             'success' => true,
             'data' => $carrinho

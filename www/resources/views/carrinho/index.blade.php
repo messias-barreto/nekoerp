@@ -45,18 +45,31 @@
         <div class="card mb-4">
             <div class="card-header">Cupom de Desconto</div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('carrinho.aplicar-cupom' )}}" method="POST">
                     @csrf
+                    @if($response['data']['cupom'])
                     <div class="input-group">
-                        <input type="text" name="coupon" class="form-control" placeholder="Digite o código do cupom">
+                        <button class="btn btn-danger">Remover</button>
+                    </div>
+                    <small class="text-success mt-2 d-block">
+                        Cupom aplicado: {{ $response['data']['cupom']['name'] }} ({{ $response['data']['cupom']['desconto'] }}% de desconto)
+                    </small>
+                    @else
+                    <div class="input-group">
+                        <input type="text" name="cupom" class="form-control" placeholder="Digite o código do cupom" required>
                         <button class="btn btn-primary">Aplicar</button>
                     </div>
-                    @if(session('discount'))
-                    <small class="text-success mt-2 d-block">
-                        Cupom aplicado: {{ session('discount')['code'] }} ({{ session('discount')['percent'] }}% de desconto)
-                    </small>
                     @endif
                 </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body d-flex justify-content-between">
+                <strong>Frete:</strong>
+                <span>
+                    R$ {{ 30 }}
+                </span>
             </div>
         </div>
 

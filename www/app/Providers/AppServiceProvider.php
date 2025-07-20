@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CupomInterface;
 use App\Interfaces\EstoqueInterface;
 use App\Interfaces\ProdutoInterface;
 use App\Interfaces\VariacaoProdutoInterface;
+use App\Repository\CupomRepository;
 use App\Repository\EstoqueRepository;
 use App\Repository\ProdutoRepository;
 use App\Repository\VariacaoProdutoRepository;
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProdutoInterface::class, ProdutoRepository::class);
         $this->app->bind(EstoqueInterface::class, EstoqueRepository::class);
         $this->app->bind(VariacaoProdutoInterface::class, VariacaoProdutoRepository::class);
+        $this->app->bind(CupomInterface::class, CupomRepository::class);
     }
 
     /**

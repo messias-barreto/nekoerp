@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Carrinho\AddQuantidadeProdutoNoCarrinhoController;
+use App\Http\Controllers\Carrinho\AplicarCupomDescontoController;
 use App\Http\Controllers\Carrinho\IndexController;
 use App\Http\Controllers\Carrinho\RemoveQuantidadeProdutoNoCarrinhoController;
 use App\Http\Controllers\Carrinho\StoreProdutoNoCarrinho;
@@ -18,3 +19,4 @@ Route::post('/carrinho', [StoreProdutoNoCarrinho::class, 'handle'])->name('carri
 Route::get('/carrinho', [IndexController::class, 'handle'])->name('carrinho.index');
 Route::post('/carrinho/produto/add-quantidade', [AddQuantidadeProdutoNoCarrinhoController::class, 'handle'])->name('carrinho.add-quantidade-produto');
 Route::post('/carrinho/produto/remove-quantidade', [RemoveQuantidadeProdutoNoCarrinhoController::class, 'handle'])->name('carrinho.remove-quantidade-produto');
+Route::post('/carrinho/cupom', [AplicarCupomDescontoController::class, 'handle'])->name('carrinho.aplicar-cupom');
