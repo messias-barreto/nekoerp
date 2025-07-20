@@ -8,6 +8,7 @@ use App\Http\Controllers\Carrinho\StoreProdutoNoCarrinho;
 use App\Http\Controllers\Produto\IndexProdutoController;
 use App\Http\Controllers\Produto\StoreProdutoController;
 use App\Http\Controllers\Produto\UpdateProdutoController;
+use App\Http\Controllers\Carrinho\RemoverCupomDescontoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,3 +21,4 @@ Route::get('/carrinho', [IndexController::class, 'handle'])->name('carrinho.inde
 Route::post('/carrinho/produto/add-quantidade', [AddQuantidadeProdutoNoCarrinhoController::class, 'handle'])->name('carrinho.add-quantidade-produto');
 Route::post('/carrinho/produto/remove-quantidade', [RemoveQuantidadeProdutoNoCarrinhoController::class, 'handle'])->name('carrinho.remove-quantidade-produto');
 Route::post('/carrinho/cupom', [AplicarCupomDescontoController::class, 'handle'])->name('carrinho.aplicar-cupom');
+Route::post('/carrinho/cupom/delete', [RemoverCupomDescontoController::class, 'handle'])->name('carrinho.remover-cupom');

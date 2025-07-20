@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container py-5">
-
     <!-- Lista de Produtos no Carrinho -->
     <div class="container py-1">
         <h2 class="mb-4">Carrinho de Compras</h2>
@@ -45,22 +44,11 @@
         <div class="card mb-4">
             <div class="card-header">Cupom de Desconto</div>
             <div class="card-body">
-                <form action="{{ route('carrinho.aplicar-cupom' )}}" method="POST">
-                    @csrf
-                    @if($response['data']['cupom'])
-                    <div class="input-group">
-                        <button class="btn btn-danger">Remover</button>
-                    </div>
-                    <small class="text-success mt-2 d-block">
-                        Cupom aplicado: {{ $response['data']['cupom']['name'] }} ({{ $response['data']['cupom']['desconto'] }}% de desconto)
-                    </small>
-                    @else
-                    <div class="input-group">
-                        <input type="text" name="cupom" class="form-control" placeholder="Digite o código do cupom" required>
-                        <button class="btn btn-primary">Aplicar</button>
-                    </div>
-                    @endif
-                </form>
+                @if(isset($response['data']['cupom']))
+                <x-form-remover-cupom-desconto :nome="$response['data']['cupom']['name']" :desconto="$response['data']['cupom']['desconto']" />
+                @else
+                <x-form-aplicar-cupom-desconto />
+                @endif
             </div>
         </div>
 
@@ -87,8 +75,6 @@
             </div>
         </div>
 
-
-
         <!-- Dados do Cliente -->
         <div class="card">
             <div class="card-header">Dados do Cliente</div>
@@ -110,4 +96,5 @@
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection
