@@ -32,7 +32,9 @@ class RemoveQuantidadeProdutoNoCarrinhoUseCase
             }
         }
 
-        $this->session::put('carrinho-produtos', ['produtos' => $newCarrinho]);
+        $carrinho['produtos'] = $newCarrinho;
+        $this->session::put('carrinho-produtos', $carrinho);
+
         return [
             'success' => true
         ];

@@ -29,6 +29,9 @@ class AplicarCupomDescontoUseCase
         );
 
         $this->session::put('carrinho-produtos', $carrinho);
-        return [];
+        return [
+            'success' => true,
+            'message' => 'Cupom Foi Aplicado.'
+        ];
     }
 }

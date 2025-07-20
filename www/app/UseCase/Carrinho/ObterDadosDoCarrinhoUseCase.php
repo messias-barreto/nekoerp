@@ -16,11 +16,21 @@ class ObterDadosDoCarrinhoUseCase
         $produtos = $this->removerProdutosQuantidadeZero($carrinho['produtos']);
 
         $valorTotal =$this->obterTotalPedido($produtos);
-        if(empty($carrinho['total']) || $carrinho['total'] != $valorTotal) {
-            $carrinho['total'] = $valorTotal;
+        $carrinho['frete'] = $this->calcularFrete($valorTotal);
+
+        if(empty($carrinho['subtotal']) || $carrinho['subtotal'] != $valorTotal) {
+            $carrinho['subtotal'] = $valorTotal;
         }
 
+        $descontoCupom = 0;
+        if(isset($carrinho['cupom'])) {
+            $descontoCupom = $this->calcularValorCupom($carrinho['cupom']['desconto'], $valorTotal);
+            $carrinho['subtotalComDesconto'] = ($valorTotal - $descontoCupom) + $carrinho['frete'];
+        }
+
+        $carrinho['total'] = $valorTotal + $carrinho['frete'];
         $carrinho['produtos'] = $produtos;
+
         $this->session::put('carrinho-produtos', $carrinho);
         return [
             'success' => true,
@@ -45,5 +55,24 @@ class ObterDadosDoCarrinhoUseCase
         }
 
         return $valorTotal;
+    }
+
+    public function calcularFrete(float $subtotal): float
+    {
+        if($subtotal >= 52 && $subtotal < 166.60) {
+            return 15;
+        }
+
+        if($subtotal > 200) {
+            return 0;
+        }
+
+        return 20;
+    }
+
+    public function calcularValorCupom(int $desconto, float $subtotal): float
+    {
+        $totalDesconto = $subtotal * ($desconto /  100);
+        return (float) round($totalDesconto, 2);
     }
 }

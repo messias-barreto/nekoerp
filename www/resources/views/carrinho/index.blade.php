@@ -40,6 +40,15 @@
             </div>
         </div>
 
+        <div class="card mb-4">
+            <div class="card-body d-flex justify-content-between">
+                <strong>Subtotal:</strong>
+                <span>
+                    R$ {{ number_format($response['data']['subtotal'], 2, ',','.') }}
+                </span>
+            </div>
+        </div>
+
         <!-- Cupom de Desconto -->
         <div class="card mb-4">
             <div class="card-header">Cupom de Desconto</div>
@@ -56,7 +65,7 @@
             <div class="card-body d-flex justify-content-between">
                 <strong>Frete:</strong>
                 <span>
-                    R$ {{ 30 }}
+                    R$ {{ $response['data']['frete'] }}
                 </span>
             </div>
         </div>
@@ -65,13 +74,17 @@
         <div class="card mb-4">
             <div class="card-body d-flex justify-content-between">
                 <strong>Total:</strong>
-                <span>
-                    R$ {{ $response['data']['total'] }}
-                    @if(session('discount'))
-                    <br>
-                    <small class="text-success">Com desconto: R$ {{ number_format($discountedTotal, 2, ',', '.') }}</small>
-                    @endif
-                </span>
+                @if(isset($response['data']['subtotalComDesconto']))
+                    <span>
+                        <s>R$ {{ $response['data']['total'] }}</s>
+                        <br>
+                        <small class="text-success">Com desconto: <strong>R$ {{ number_format($response['data']['subtotalComDesconto'], 2, ',', '.') }}</strong></small>
+                    </span>
+                @else
+                    <span>
+                        R$ <strong>{{ $response['data']['total'] }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
 
