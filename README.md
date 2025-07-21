@@ -65,7 +65,7 @@ docker-compose up -d
 ```
 - Execute migrations e populate inicial:
 ```    
-docker-compose exec -it nekoerpweb bash app php artisan migrate
-docker-compose exec app php artisan migrate
+docker-compose exec -it web docker-php-ext-install pdo_mysql
+docker-compose exec -it web php artisan migrate
 ``` 
 - A aplicação estará disponível em http://localhost:8000.
