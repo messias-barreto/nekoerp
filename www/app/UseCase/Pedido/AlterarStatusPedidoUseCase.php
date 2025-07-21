@@ -3,13 +3,16 @@
 namespace App\UseCase\Pedido;
 
 use App\Interfaces\PedidoInterface;
+use App\Mail\NotificacaoPedido;
+use Illuminate\Support\Facades\Mail;
 
 class AlterarStatusPedidoUseCase
 {
     const STATUS = ['pendente', 'aprovado', 'cancelado'];
 
     public function __construct(
-        private readonly PedidoInterface $pedidoRepository
+        private readonly PedidoInterface $pedidoRepository,
+        private readonly Mail $mail
     ) {}
 
     public function execute(array $data): array
@@ -37,8 +40,6 @@ class AlterarStatusPedidoUseCase
             ];
         }
 
-        if($data['status'])
-
         $pedidoAtualizado = $this->pedidoRepository->updateStatus($data['id'], $data['status']);
         if(empty($pedidoAtualizado)) {
             return [
@@ -47,9 +48,18 @@ class AlterarStatusPedidoUseCase
             ];
         }
 
+        $pedido->status = $data['status'];
+        $this->enviarEmail($pedido->toArray());
         return [
             'success' => true,
             'message' => 'Status do Pedido Solicitado foi Atualizado!'
         ];
+    }
+
+    public function enviarEmail(array $pedido)
+    {
+        $this->mail::to($pedido['client_email'])->send(new NotificacaoPedido([
+            'data' => $pedido
+        ]));
     }
 }
