@@ -14,7 +14,7 @@ use App\Http\Controllers\Pedido\StorePedidoController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [IndexProdutoController::class, 'handle']);
+Route::get('/', [IndexProdutoController::class, 'handle'])->name('produtos.index');
 Route::get('/produtos-create', [IndexProdutoController::class, 'handle']);
 Route::post('/produtos-store', [StoreProdutoController::class, 'handle'])->name('produtos.store');
 Route::post('/produtos-update', [UpdateProdutoController::class, 'handle'])->name('produtos.update');

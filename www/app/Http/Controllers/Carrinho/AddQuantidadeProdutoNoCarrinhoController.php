@@ -15,6 +15,10 @@ class AddQuantidadeProdutoNoCarrinhoController
     public function handle(Request $request): RedirectResponse
     {
         $response = $this->useCase->execute($request->all());
+        if($response['success'] == false) {
+            return redirect()->back()->with('response-data', $response);
+        }
+
         return redirect()->back();
     }
 }

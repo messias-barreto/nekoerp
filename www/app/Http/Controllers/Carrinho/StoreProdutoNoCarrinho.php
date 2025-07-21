@@ -15,6 +15,6 @@ class StoreProdutoNoCarrinho
     public function handle(Request $request): RedirectResponse
     {
         $response = $this->useCase->execute($request->all());
-        return redirect()->back();
+        return redirect()->back()->with('response-data', $response);;
     }
 }

@@ -9,6 +9,9 @@
         </div>
 
         <div class="row" id="product-list">
+            @if (session('response-data') !== NULL)
+                <x-alert :retorno="session('response-data')['success']" :message="session('response-data')['message']"></x-alert>
+            @endif
             @forelse($response['products'] as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow h-100">

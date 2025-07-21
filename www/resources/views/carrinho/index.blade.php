@@ -12,6 +12,9 @@
                 Produtos no Carrinho
             </div>
             <div class="card-body">
+                @if (session('response-data') !== NULL)
+                    <x-alert :retorno="session('response-data')['success']" :message="session('response-data')['message']"></x-alert>
+                @endif
                 @forelse ($response['data']['produtos'] ?? [] as $item)
                 <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                     <div>

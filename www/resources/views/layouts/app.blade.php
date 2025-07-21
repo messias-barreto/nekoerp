@@ -30,7 +30,7 @@
     {{-- Navbar simples --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('produtos.index') }}">
                 <img src="/img/logo.png" alt="NekoERP" height="40" class="me-2">
                 <strong>NekoERP</strong>
             </a>

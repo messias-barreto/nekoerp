@@ -42,7 +42,8 @@ class AddQuantidadeProdutoNoCarrinhoUseCase
 
         $this->session::put('carrinho-produtos', $carrinho);
         return [
-            'success' => true
+            'success' => true,
+            'message' => 'Produto Adicionado'
         ];
     }
 }

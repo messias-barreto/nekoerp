@@ -13,7 +13,7 @@ class StorePedidoController
     ) {}
     public function handle(Request $request): RedirectResponse
     {
-        $this->useCase->execute($request->all());
-        return redirect('/');
+        $response = $this->useCase->execute($request->all());
+        return redirect('/')->with('response-data', $response);;
     }
 }

@@ -21,7 +21,7 @@ class PedidoRepository implements PedidoInterface
 
     public function getAllPedidos(): LengthAwarePaginator
     {
-        return $this->repository->paginate(10);
+        return $this->repository->whereNot('status', 'cancelado')->paginate(10);
     }
 
     public function findById(int $id): ?Pedido

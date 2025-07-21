@@ -6,7 +6,7 @@ use App\Interfaces\PedidoInterface;
 
 class AlterarStatusPedidoUseCase
 {
-    const STATUS = ['pendente', 'concluido', 'cancelado'];
+    const STATUS = ['pendente', 'aprovado', 'cancelado'];
 
     public function __construct(
         private readonly PedidoInterface $pedidoRepository
