@@ -27,6 +27,24 @@ Gere a chave:
 php artisan key:generate
 ``` 
 Configure o .env com os dados do seu MySQL.
+```
+Banco de Dados
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=3306
+DB_DATABASE=nekoerp
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- Configure os dados do Mail
+```
+Mail (EXEMPLO)
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=ed413f08e853fd
+MAIL_PASSWORD=2790769af38796
+```
 
 Crie o banco:
 ```
