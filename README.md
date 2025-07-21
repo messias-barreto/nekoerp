@@ -59,13 +59,46 @@ Acesse em http://localhost:8000.
 cp .env.example .env
 ```
 - Ajuste as variáveis de ambiente conforme desejado (banco, portas, etc.).
+```
+Banco de Dados
+DB_CONNECTION=mysql
+DB_HOST=nekoerp_database
+DB_PORT=3306
+DB_DATABASE=nekoerp
+DB_USERNAME=root
+DB_PASSWORD=123456
+```
+```
+Mail (EXEMPLO)
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=ed413f08e853fd
+MAIL_PASSWORD=2790769af38796
+```
+
 - Inicie os containers:
 ```
-docker-compose up -d
+docker compose up --build -d
+```
+- Execute o Comando para gerar a chave: 
+```
+docker exec -it web php artisan key:generate
 ```
 - Execute migrations e populate inicial:
 ```    
-docker-compose exec -it web docker-php-ext-install pdo_mysql
-docker-compose exec -it web php artisan migrate
-``` 
+docker compose exec -it web docker-php-ext-install pdo_mysql
+docker compose exec -it web php artisan migrate:seed (vai gerar os cupons (#neko5, #neko10, #neko20 e #neko50)
+```
+## Obs: 
+- Após buildar o projeto pela primeira vêz, e gerar a pasta vendor em www, você pode alterar o comando do docker-compose.yml 
+```
+de 
+command: sh -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
+```
+```
+para
+command: php artisan serve --host=0.0.0.0 --port=8000"
+```
+
 - A aplicação estará disponível em http://localhost:8000.
