@@ -88,7 +88,7 @@ docker exec -it web php artisan key:generate
 - Execute migrations e populate inicial:
 ```    
 docker compose exec -it web docker-php-ext-install pdo_mysql
-docker compose exec -it web php artisan migrate:seed (vai gerar os cupons (#neko5, #neko10, #neko20 e #neko50)
+docker compose exec -it web php artisan migrate --seed (vai gerar os cupons (#neko5, #neko10, #neko20 e #neko50)
 ```
 ## Obs: 
 - Após buildar o projeto pela primeira vêz, e gerar a pasta vendor em www, você pode alterar o comando do docker-compose.yml 
