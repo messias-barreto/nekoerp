@@ -36,7 +36,7 @@ DB_DATABASE=nekoerp
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-- Configure os dados do Mail
+- Configure os dados do Servidor SMTP
 ```
 Mail (EXEMPLO)
 MAIL_MAILER=smtp
@@ -99,7 +99,7 @@ MAIL_PASSWORD=2790769af38796
 ```
 docker compose up --build -d
 ```
-- Execute o Comando para gerar a chave: 
+- Execute o Comando para gerar a chave de criptografia do Laravel: 
 ```
 docker exec -it web php artisan key:generate
 ```
